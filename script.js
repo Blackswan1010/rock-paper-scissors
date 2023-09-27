@@ -6,55 +6,39 @@
 // Window.confirm() to ask if user wants to play again. If true; play again, false. exit.
 
 var userInput = prompt("Enter R, P or S");
+var options = ["R", "P", "S"];
 var userPoints = 0;
 var compPoints = 0;
 var gameTie = 0;
+var playAgain;
 
 while (userInput != "R" && userInput != "P" && userInput != "S") {
     userInput = prompt("Please choose R, P or S");
 }
 
-var compChoice = ["R", "P", "S"];
+userInput = userInput.toUpperCase();
+
 var compRandom = Math.floor((Math.random()) * 2);
+var compChoice = options[compRandom];
 
-console.log(compChoice[compRandom]);
-
-if (userInput === compChoice) {
-    console.log("Tied!")
+if (userInput == compChoice) {
+    window.alert("Tied!")
     gameTie++;
 }
-else if (userInput === "P") {
-    if (compChoice === "S") {
-        alert("You lose!");
+else if ((userInput == "P" && compChoice == "S") || (userInput == "R" && compChoice == "P") || (userInput == "S" && compChoice == "R")) {
+        window.alert("You lose!");
         compPoints++;
-    }
-    else if (compChoice === "R") {
-        alert("You win!");
-        userPoints++;
-    }
 }
-
-else if (userInput === "R") {
-    if (compChoice === "P") {
-        alert("You lose!");
+else if ((userInput == "P" && compChoice == "R") || (userInput == "R" && compChoice == "S") || (userInput == "S" && compChoice == "P")) {
+    window.alert("You win!");
         compPoints++;
-    }
-    else if (compChoice === "S") {
-        alert("You win!");
-        userPoints++;
-    }
-}
-
-else if (userInput === "S") {
-    if (compChoice === "R") {
-        alert("You lose!");
-        compPoints++;
-    }
-    else if (compChoice === "P") {
-        alert("You win!");
-        userPoints++;
-    }
 }
 
 
-window.prompt();
+alert(
+    "Wins: " + userPoints + "\n Losses: " + compPoints + "\n Ties: " + gameTie
+);
+
+
+
+// window.prompt();
